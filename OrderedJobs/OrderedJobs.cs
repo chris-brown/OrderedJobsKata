@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OrderedJobs
 {
@@ -6,23 +7,17 @@ namespace OrderedJobs
   {
     public IEnumerable<string> OrderedList()
     {
-      var dependencyList = new List<string>();
-      foreach (var job in this)
+      var dependencyList = this.Where(job => !job.HasDependency).Select(job => job.Name).ToList();
+
+      foreach (var job in this.Where(job => job.HasDependency))
       {
-        if (job.HasDependency)
-        {
-          AddIfExists(dependencyList, job.DependencyName);
-          AddIfExists(dependencyList, job.Name);
-        }
-        else
-        {
-          AddIfExists(dependencyList, job.Name);
-        }
+        AddIfExists(dependencyList, job.DependencyName);
+        AddIfExists(dependencyList, job.Name);
       }
       return dependencyList;
     }
 
-    private static void AddIfExists(List<string> dependencyList, string name)
+    private static void AddIfExists(ICollection<string> dependencyList, string name)
     {
       if (!dependencyList.Contains(name))
       {

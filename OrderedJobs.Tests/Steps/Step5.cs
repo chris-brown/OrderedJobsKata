@@ -3,7 +3,7 @@
 namespace OrderedJobs.Tests.Steps
 {
   [TestFixture]
-  class Step4 : TestBase
+  class Step5 : TestBase
   {
     private string _result;
     private string _sequence;
@@ -12,7 +12,10 @@ namespace OrderedJobs.Tests.Steps
     {
       _sequence = @"a =>
                     b => c
-                    c =>";
+                    c => f
+                    d => a
+                    e => b
+                    f =>";
     }
 
     protected override void When()
@@ -21,8 +24,8 @@ namespace OrderedJobs.Tests.Steps
     }
 
     [Test]
-    public void Multiple_Jobs_Single_Dependency(){
-      Assert.That(_result, Is.EqualTo("acb"));
+    public void Multiple_Jobs_Multiple_Dependency(){
+      Assert.That(_result, Is.EqualTo("afcbde"));
     }
   }
 }

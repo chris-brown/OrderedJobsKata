@@ -11,7 +11,7 @@ namespace OrderedJobs.Tests
     [Test]
     public void Step1_GivenAnEmptyString_ResultShouldBeEmpty()
     {
-      var result = _instructions.Jobs(string.Empty);
+      var result = _instructions.Process(string.Empty);
 
       Assert.That(result, Is.Empty);
     }
@@ -19,7 +19,7 @@ namespace OrderedJobs.Tests
     [Test]
     public void Step2_GivenSingleJob_ExpectedSingleJobA()
     {
-      var result = _instructions.Jobs("a =>");
+      var result = _instructions.Process("a =>");
 
       Assert.That(result, Is.EqualTo("a"));
     }
@@ -30,7 +30,7 @@ namespace OrderedJobs.Tests
       const string structure = @"a =>
                         b =>
                         c => ";
-      var result = _instructions.Jobs(structure);
+      var result = _instructions.Process(structure);
 
       Assert.That(result, Is.EqualTo("abc"));
     }
@@ -42,7 +42,7 @@ namespace OrderedJobs.Tests
                                 b => c
                                 c =>";
 
-      var result = _instructions.Jobs(structure);
+      var result = _instructions.Process(structure);
 
       Assert.That(result, Is.EqualTo("acb"));
     }

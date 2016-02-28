@@ -15,7 +15,7 @@ namespace OrderedJobs
       _orderedJobs = new OrderedJobs();
     }
 
-    public string Jobs(string job)
+    public string Process(string job)
     {
       var sequence = string.Empty;
       if (string.IsNullOrEmpty(job)) return sequence;
@@ -32,11 +32,7 @@ namespace OrderedJobs
     {
       var jobSequence = instruction.Split(StructureSplit, StringSplitOptions.RemoveEmptyEntries);
 
-      var job = new Job(jobSequence);
-
-      _orderedJobs.Add(job);
-
-      return;
+      _orderedJobs.Add(new Job(jobSequence));
     }
   }
 }

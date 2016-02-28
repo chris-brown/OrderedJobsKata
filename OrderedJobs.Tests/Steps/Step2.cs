@@ -15,7 +15,7 @@ namespace OrderedJobs.Tests.Steps
 
     protected override void When()
     {
-      _result = _instructions.Jobs(_value);
+      _result = _instructions.Process(_value);
     }
 
     [Test]
