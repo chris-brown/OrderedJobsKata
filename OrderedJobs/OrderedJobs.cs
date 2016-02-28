@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,10 @@ namespace OrderedJobs
 
       foreach (var job in this.Where(job => job.HasDependency))
       {
+        if (job.DependencyName.Equals(job.Name, StringComparison.InvariantCultureIgnoreCase))
+        {
+          throw new SelfReferencingDependencyException();
+        }
         AddIfExists(dependencyList, job.DependencyName);
         AddIfExists(dependencyList, job.Name);
       }

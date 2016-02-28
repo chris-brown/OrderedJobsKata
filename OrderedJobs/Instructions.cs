@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderedJobs
 {
@@ -24,7 +22,14 @@ namespace OrderedJobs
         ParseInstruction(line);
       }
 
-      return string.Join("", _orderedJobs.OrderedList());
+      try
+      {
+        return string.Join("", _orderedJobs.OrderedList());
+      }
+      catch (SelfReferencingDependencyException ex)
+      {
+        return ex.Message;
+      }
     }
 
     private static void ParseInstruction(string instruction)

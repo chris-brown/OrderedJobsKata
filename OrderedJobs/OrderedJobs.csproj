@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SelfReferencingDependencyException.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="Instructions.cs" />
     <Compile Include="OrderedJobs.cs" />
