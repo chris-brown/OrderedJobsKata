@@ -17,8 +17,7 @@ namespace OrderedJobs
 
     public string Process(string job)
     {
-      var sequence = string.Empty;
-      if (string.IsNullOrEmpty(job)) return sequence;
+      if (string.IsNullOrEmpty(job)) return job;
 
       foreach (var line in job.Split(_lineReturnSplit, StringSplitOptions.RemoveEmptyEntries))
       {
