@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderedJobs
+namespace OrderedJobs.Exceptions
 {
   public class SelfReferencingDependencyException : Exception
   {

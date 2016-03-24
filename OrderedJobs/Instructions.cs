@@ -1,4 +1,5 @@
 ﻿using System;
+using OrderedJobs.Exceptions;
 
 namespace OrderedJobs
 {
@@ -17,16 +18,20 @@ namespace OrderedJobs
     {
       if (string.IsNullOrEmpty(job)) return job;
 
-      foreach (var line in job.Split(_lineReturnSplit, StringSplitOptions.RemoveEmptyEntries))
-      {
-        ParseInstruction(line);
-      }
-
       try
       {
+        foreach (var line in job.Split(_lineReturnSplit, StringSplitOptions.RemoveEmptyEntries))
+        {
+          ParseInstruction(line);
+        }
+
         return string.Join("", _orderedJobs.OrderedList());
       }
       catch (SelfReferencingDependencyException ex)
+      {
+        return ex.Message;
+      }
+      catch (CircularReferencingDependencyException ex)
       {
         return ex.Message;
       }

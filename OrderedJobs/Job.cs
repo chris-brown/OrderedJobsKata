@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using OrderedJobs.Exceptions;
 
 namespace OrderedJobs
 {
@@ -9,6 +10,8 @@ namespace OrderedJobs
     public Job(string[] sequence)
     {
       _sequence = sequence;
+
+      if(HasDependency && DependencyName == Name) throw new SelfReferencingDependencyException();
     }
 
     public string Name

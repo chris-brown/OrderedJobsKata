@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="JobsKata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\Step7.cs" />
     <Compile Include="Steps\Step6.cs" />
     <Compile Include="Steps\Step5.cs" />
     <Compile Include="Steps\Step4.cs" />
